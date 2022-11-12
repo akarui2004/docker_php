@@ -13,10 +13,10 @@ services:
   nginx:
     platform: ${BUILD_PLATFORM}
     build: .docker/nginx
-    container_name: php_nginx
+    container_name: ${NGINX_CONTAINER_NAME}
     restart: unless-stopped
     tty: true
     ports:
-      - '8000:80'
+      - '${NGINX_HOST_PORT}:80'
     volumes:
       - "${APP_HOST_PATH}:/var/www"
