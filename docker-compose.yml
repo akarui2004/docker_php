@@ -1,0 +1,22 @@
+version: '3.8'
+
+networks:
+  php_network:
+    driver: ${NETWORK_DRIVER}
+volumes:
+  mysql:
+    driver: ${VOLUME_DRIVER}
+  redis:
+    driver: ${VOLUME_DRIVER}
+
+services:
+  nginx:
+    platform: ${BUILD_PLATFORM}
+    build: .docker/nginx
+    container_name: php_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - '8000:80'
+    volumes:
+      - "${APP_HOST_PATH}:/var/www"
